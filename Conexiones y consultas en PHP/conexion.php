@@ -49,7 +49,7 @@ if ($busqueda == "suc"){
 	if ($num==0){
 		echo "non hay nada unu";
 		}else{
-		echo "clientes de la sucursal"$nombre."<br>";
+		echo "clientes de la sucursal."$nombre."<br>";
 		// output data of each row
 		while ( $row = mysqli_fetch_assoc($result)) {
 
