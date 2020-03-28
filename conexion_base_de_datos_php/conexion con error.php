@@ -13,13 +13,5 @@ mysqli_select_db($con,'sucursaldeclientes')or die("No de pudo conectar con la ba
 
 
 
-if($con){
-	echo "conectado";
-
-}
-else{
-	echo "no conectado";
-}
-
 
 ?>
