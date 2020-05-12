@@ -16,11 +16,15 @@ $nombre=$_POST["nombre"];
 $xd=1;
 
 if ($busqueda == "cli"){
-	$sql = "select * from clientes where nombre = '$nombre'";
+	//se borra la "s" para que detecte el error el filtro
+	$sql = "select * from cliente where nombre like '%". $nombre ."%';";
 
 	$result = mysqli_query($con, $sql);
-
-	$num = mysqli_num_rows($result);
+if (!$result) {
+ // El commit falló!
+ echo "Error numero $con->errno $con->error";
+}
+else{$num = mysqli_num_rows($result);
 	if ($num==0){
 		echo "no se encontraron resultados";
 		}else{
@@ -38,18 +42,21 @@ if ($busqueda == "cli"){
 		}
 
 	} 
-
+}
+	
 }else{ 
 if ($busqueda == "suc"){
-	$sql = "select nombre,primer_apellido from clientes where sucursal = '$nombre'";
+	//se borra la "l" en sucursal para que marque un error y lo detecte el filtro
+	$sql = "select nombre,primer_apellido from clientes where sucursa ='$nombre';";
 
 	$result = mysqli_query($con, $sql);
-
-	$num = mysqli_num_rows($result);
+if (!$result) {
+    printf("Errormessage: %s\n", $con->error);
+}else{$num = mysqli_num_rows($result);
 	if ($num==0){
 		echo "non hay nada unu";
 		}else{
-		echo "clientes de la sucursal."$nombre."<br>";
+		echo "clientes de la sucursal ".$nombre."<br>";
 		// output data of each row
 		while ( $row = mysqli_fetch_assoc($result)) {
 
@@ -60,7 +67,8 @@ if ($busqueda == "suc"){
 	}
 
 
-	}else{
+	}}
+	else{
 
 	echo "no has escrito nada";
 	}
